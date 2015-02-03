@@ -1,0 +1,21 @@
+{
+    "name": "vyants/yii2-softdelete",
+    "description": "Behavior for soft delete pattern",
+    "type": "yii2-behavior",
+    "keywords": ["yii2","behavior", "soft delete pattern"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Vladimir Yants",
+            "email": "vladimir.yants@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "vyants\\softdelete\\": ""
+        }
+    }
+}
