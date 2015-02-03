@@ -42,7 +42,6 @@ class SoftDelete extends Behavior
     public function events() {
         return [
             ActiveRecord::EVENT_BEFORE_DELETE => 'softDelete',
-            ActiveRecord::EVENT_BEFORE_FIND => 'filterDeleted'
         ];
     }
 
@@ -57,22 +56,6 @@ class SoftDelete extends Behavior
             $this->owner->$attributes[0] = time();
         }
 
-        $attributes[1] = $this->statusAttribute;
-        $this->owner->$attributes[1] = $this->deletedValue;
-
-        // save record
-        $this->owner->save(false, $attributes);
-
-        //prevent real delete
-        $event->isValid = false;
-    }
-
-    /**
-     * Set the attribute deleted
-     *
-     * @param Event $event
-     */
-    public function filterDeleted($event) {
         $attributes[1] = $this->statusAttribute;
         $this->owner->$attributes[1] = $this->deletedValue;
 
