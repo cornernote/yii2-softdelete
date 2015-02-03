@@ -11,7 +11,7 @@ use yii\db\ActiveRecord;
  * Class SoftDelete
  *
  * @package vendor\vyants\softdelete
- * @author Vladimir Yants <vyants@dengisrazy.ru>
+ * @author Vladimir Yants <vladimir.yants@gmail.com>
  * @property ActiveRecord $owner
  */
 class SoftDelete extends Behavior
@@ -51,8 +51,8 @@ class SoftDelete extends Behavior
      * @param Event $event
      */
     public function softDelete($event) {
-        $attributes[0] = $this->timeAttribute;
-        if($attributes[0]) {
+        if($this->timeAttribute) {
+            $attributes[0] = $this->timeAttribute;
             $this->owner->$attributes[0] = time();
         }
 
@@ -70,8 +70,8 @@ class SoftDelete extends Behavior
      * Restore soft-deleted record
      */
     public function restore() {
-        $attributes[0] = $this->timeAttribute;
-        if($attributes[0]) {
+        if($this->timeAttribute) {
+            $attributes[0] = $this->timeAttribute;
             $this->owner->$attributes[0] = null;
         }
 
