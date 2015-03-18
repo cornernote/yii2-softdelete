@@ -36,21 +36,12 @@ class SoftDelete extends Behavior
      */
     public $activeValue = 1;
 
-    /**
-     * @inheritdoc
-     */
-    public function events() {
-        return [
-            ActiveRecord::EVENT_BEFORE_DELETE => 'softDelete',
-        ];
-    }
 
     /**
-     * Set the attribute deleted
-     *
-     * @param Event $event
+     * Удалить софтделитом. Возращает true/false в зависимости от того, успешно ли
+     * @return bool
      */
-    public function softDelete($event) {
+    public function softDelete() {
         if($this->timeAttribute) {
             $attributes[0] = $this->timeAttribute;
             $this->owner->$attributes[0] = time();
@@ -60,14 +51,12 @@ class SoftDelete extends Behavior
         $this->owner->$attributes[1] = $this->deletedValue;
 
         // save record
-        $this->owner->save(false, $attributes);
-
-        //prevent real delete
-        $event->isValid = false;
+        return $this->owner->save(false, $attributes);
     }
 
     /**
-     * Restore soft-deleted record
+     * Restore soft-deleted record. Возращает true/false в зависимости от того, успешно ли
+     * @return bool
      */
     public function restore() {
         if($this->timeAttribute) {
@@ -79,15 +68,20 @@ class SoftDelete extends Behavior
         $this->owner->$attributes[1] = $this->activeValue;
 
         // save record
-        $this->owner->save(false, $attributes);
+        return $this->owner->save(false, $attributes);
     }
+
     /**
-     * Force delete from database
+     * Force delete from database. Возращает true/false в зависимости от того, успешно ли
+     * @return bool
      */
     public function forceDelete() {
         // store model so that we can detach the behavior and delete as normal
         $model = $this->owner;
         $this->detach();
-        $model->delete();
+        $result = $model->delete();
+        $this->attach($model);
+        return $result;
     }
+
 }
