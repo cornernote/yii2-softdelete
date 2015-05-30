@@ -1,6 +1,6 @@
 <?php
 
-namespace vyants\softdelete;
+namespace cornernote\softdelete;
 
 use yii\base\Behavior;
 use yii\base\Event;
