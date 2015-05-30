@@ -113,18 +113,4 @@ class SoftDeleteBehavior extends Behavior
         }
     }
 
-    public function deleteds()
-    {
-        $model = new $this->owner->modelClass();
-        $this->owner->andWhere($this->attribute . ' IS NULL');
-        return $this->owner;
-    }
-
-    public function undeleteds()
-    {
-        $model = new $this->owner->modelClass();
-        $this->owner->andWhere($this->attribute . ' IS NOT NULL');
-        return $this->owner;
-    }
-
 }
