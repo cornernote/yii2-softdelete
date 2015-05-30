@@ -14,7 +14,7 @@ use yii\db\Expression;
  * ```
  * public function behaviors() {
  *     return [
- *         'softDelete' => [
+ *         [
  *             'class' => 'cornernote\behaviors\SoftDeleteBehavior',
  *             'attribute' => 'delete_time',
  *             'value' => new Expression('NOW()'),

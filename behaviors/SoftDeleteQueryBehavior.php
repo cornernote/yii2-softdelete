@@ -12,7 +12,7 @@ use yii\db\ActiveQuery;
  * ```
  * public function behaviors() {
  *     return [
- *         'softDelete' => [
+ *         [
  *             'class' => 'cornernote\behaviors\SoftDeleteQueryBehavior',
  *             'attribute' => 'delete_time',
  *         ],
@@ -31,14 +31,20 @@ class SoftDeleteQueryBehavior extends Behavior
      */
     public $attribute = 'deleted_at';
 
-    public function deleteds()
-    {
-        return $this->owner->andWhere($this->attribute . ' IS NULL');
-    }
-
-    public function undeleteds()
+    /**
+     * @return static
+     */
+    public function deleted()
     {
         return $this->owner->andWhere($this->attribute . ' IS NOT NULL');
+    }
+
+    /**
+     * @return static
+     */
+    public function notDeleted()
+    {
+        return $this->owner->andWhere($this->attribute . ' IS NULL');
     }
 
 }
