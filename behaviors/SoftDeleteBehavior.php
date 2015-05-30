@@ -25,7 +25,6 @@ use yii\db\Expression;
  * @property BaseActiveRecord $owner
  *
  * @author cornernote <cornernote@gmail.com>
- * @author amnah <amnah.dev@gmail.com>
  */
 class SoftDeleteBehavior extends Behavior
 {
@@ -111,6 +110,20 @@ class SoftDeleteBehavior extends Behavior
         } else {
             return $this->value !== null ? call_user_func($this->value, $event) : time();
         }
+    }
+
+    public function deleteds()
+    {
+        $model = new $this->owner->modelClass();
+        $this->owner->andWhere($this->attribute . ' IS NULL');
+        return $this->owner;
+    }
+
+    public function undeleteds()
+    {
+        $model = new $this->owner->modelClass();
+        $this->owner->andWhere($this->attribute . ' IS NOT NULL');
+        return $this->owner;
     }
 
 }
