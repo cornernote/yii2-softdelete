@@ -12,9 +12,9 @@ use yii\db\ActiveQuery;
  * ```
  * public function behaviors() {
  *     return [
- *         'softDelete' => ['class' => 'cornernote\behaviors\SoftDeleteBehavior',
+ *         'softDelete' => [
+ *             'class' => 'cornernote\behaviors\SoftDeleteQueryBehavior',
  *             'attribute' => 'delete_time',
- *             'value' => new Expression('NOW()'),
  *         ],
  *     ];
  * }
