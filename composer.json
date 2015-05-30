@@ -1,8 +1,8 @@
 {
-    "name": "vyants/yii2-softdelete",
+    "name": "cornernote/yii2-softdelete",
     "description": "Behavior for soft delete pattern",
     "type": "yii2-behavior",
-    "keywords": ["yii2","behavior", "soft delete pattern"],
+    "keywords": ["yii2", "soft delete pattern"],
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "vyants\\softdelete\\": ""
+            "cornernote\\": ""
         }
     }
 }
