@@ -2,10 +2,10 @@
 
 namespace cornernote\behaviors;
 
+use yii\base\Behavior;
 use yii\base\Event;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
-use yii\behaviors\AttributeBehavior;
 
 /**
  * SoftDeleteBehavior
@@ -27,12 +27,13 @@ use yii\behaviors\AttributeBehavior;
  * @author cornernote <cornernote@gmail.com>
  * @author amnah <amnah.dev@gmail.com>
  */
-class SoftDeleteBehavior extends AttributeBehavior
+class SoftDeleteBehavior extends Behavior
 {
     /**
      * @var string SoftDelete attribute
      */
-    public $deletedAtAttribute = 'deleted_at';
+    public $attribute = 'deleted_at';
+
     /**
      * @var callable|Expression The expression that will be used for generating the timestamp.
      * This can be either an anonymous function that returns the timestamp value,
@@ -46,7 +47,7 @@ class SoftDeleteBehavior extends AttributeBehavior
      */
     public function events()
     {
-        return [BaseActiveRecord::EVENT_BEFORE_DELETE => 'doDeleteTimestamp'];
+        return [BaseActiveRecord::EVENT_BEFORE_DELETE => 'softDeleteEvent'];
     }
 
     /**
@@ -54,32 +55,31 @@ class SoftDeleteBehavior extends AttributeBehavior
      *
      * @param Event $event
      */
-    public function doDeleteTimestamp($event)
+    public function softDeleteEvent($event)
     {
         // remove and mark as invalid to prevent real deletion
-        $this->remove();
+        $this->softDelete();
         $event->isValid = false;
     }
 
     /**
-     * Remove (aka soft-delete) record
+     * Soft delete record
      */
-    public function remove()
+    public function softDelete()
     {
-        // evaluate timestamp and set attribute
-        $timestamp = $this->evaluateAttributes();
+        // set attribute with evaluated timestamp
         $attribute = $this->attribute;
-        $this->owner->$attribute = $timestamp;
+        $this->owner->$attribute = $this->getValue(null);
         // save record
         $this->owner->save(false, [$attribute]);
     }
 
     /**
-     * Restore soft-deleted record
+     * Restore record
      */
-    public function restore()
+    public function unDelete()
     {
-        // mark attribute as null
+        // set attribute as null
         $attribute = $this->attribute;
         $this->owner->$attribute = null;
         // save record
@@ -89,17 +89,20 @@ class SoftDeleteBehavior extends AttributeBehavior
     /**
      * Delete record from database regardless of the $safeMode attribute
      */
-    public function forceDelete()
+    public function hardDelete()
     {
-        // store model so that we can detach the behavior and delete as normal
+        // store model so that we can detach the behavior
         $model = $this->owner;
         $this->detach();
+        // delete as normal
         $model->delete();
     }
 
-
     /**
-     * @inheritdoc
+     * Evaluate the timestamp to be saved.
+     *
+     * @param Event $event the event that triggers the current attribute updating.
+     * @return mixed the attribute value
      */
     protected function getValue($event)
     {
