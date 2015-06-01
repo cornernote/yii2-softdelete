@@ -1,6 +1,6 @@
 <?php
 
-namespace cornernote\behaviors;
+namespace cornernote\softdelete\behaviors;
 
 use yii\base\Behavior;
 use yii\base\Event;
