@@ -7,7 +7,7 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist cornernote/yii2-softdelete "*"
+$ composer require cornernote/yii2-softdelete "*"
 ```
 
 or add
@@ -16,7 +16,8 @@ or add
 "cornernote/yii2-softdelete": "*"
 ```
 
-to the require section of your `composer.json` file.
+to the `require` section of your `composer.json` file.
+
 
 ## Usage
 
