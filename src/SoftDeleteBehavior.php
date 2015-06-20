@@ -101,7 +101,7 @@ class SoftDeleteBehavior extends Behavior
     /**
      * Evaluate the timestamp to be saved.
      *
-     * @param Event $event the event that triggers the current attribute updating.
+     * @param Event|null $event the event that triggers the current attribute updating.
      * @return mixed the attribute value
      */
     protected function getValue($event)
