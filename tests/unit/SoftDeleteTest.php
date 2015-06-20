@@ -11,7 +11,6 @@ namespace tests;
 use tests\models\PostA;
 use tests\models\PostB;
 use Yii;
-use yii\db\Connection;
 
 /**
  * SoftDeleteTest
