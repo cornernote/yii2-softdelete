@@ -6,10 +6,6 @@
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Vladimir Yants",
-            "email": "vladimir.yants@gmail.com"
-        },
-        {
             "name": "Brett O'Donnell",
             "email": "cornernote@gmail.com"
         }
