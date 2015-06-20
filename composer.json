@@ -17,6 +17,10 @@
     "require": {
         "yiisoft/yii2": "*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "phpunit/dbunit": "~1.0"
+    },
     "autoload": {
         "psr-4": {
             "cornernote\\softdelete\\": "src"

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <post_a id="1" title="Post title 1" body="Post body 1"/>
+    <post_a id="2" title="Post title 2" body="Post body 2"/>
+    <post_a id="3" title="Post title 3" body="Post body 3" deleted_at="1434780293"/>
+
+    <post_b id="1" title="Post title 1" body="Post body 1"/>
+    <post_b id="2" title="Post title 2" body="Post body 2"/>
+    <post_b id="3" title="Post title 3" body="Post body 3" deleted_at="2015-06-20 16:10:37"/>
+
+</dataset>
