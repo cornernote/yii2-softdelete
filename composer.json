@@ -1,8 +1,8 @@
 {
     "name": "cornernote/yii2-softdelete",
-    "description": "Behavior for soft delete pattern",
-    "type": "yii2-behavior",
+    "description": "Soft delete behavior for Yii2.",
     "keywords": ["yii2", "soft delete"],
+    "type": "yii2-behavior",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "cornernote\\softdelete\\": ""
+            "cornernote\\softdelete\\": "src"
         }
     }
 }
