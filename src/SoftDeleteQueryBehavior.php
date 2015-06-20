@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author Brett O'Donnell <cornernote@gmail.com>
+ * @copyright 2015 Mr PHP
+ * @link https://github.com/cornernote/yii2-softdelete
+ * @license BSD-3-Clause https://raw.github.com/cornernote/yii2-softdelete/master/LICENSE.md
+ */
 
 namespace cornernote\softdelete;
 
@@ -21,8 +27,6 @@ use yii\db\ActiveQuery;
  * ```
  *
  * @property ActiveQuery $owner
- *
- * @author cornernote <cornernote@gmail.com>
  */
 class SoftDeleteQueryBehavior extends Behavior
 {
