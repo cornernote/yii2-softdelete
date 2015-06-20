@@ -2,14 +2,6 @@
 
 Copyright (c) 2013-2015, Mr PHP <info@mrphp.com.au>
 
-```
- _____     _____ _____ _____
-|     |___|  _  |  |  |  _  |
-| | | |  _|   __|     |   __|
-|_|_|_|_| |__|  |__|__|__|
-
-```
-
 > Redistribution and use in source and binary forms, with or without modification,
 > are permitted provided that the following conditions are met:
 >
