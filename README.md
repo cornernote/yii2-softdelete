@@ -36,10 +36,10 @@ In your ActiveRecord class:
 ```php
 public function behaviors() {
     return [
-        \cornernote\behaviors\SoftDeleteBehavior::className(),
+        \cornernote\softdelete\SoftDeleteBehavior::className(),
         // or
         [
-            'class' => \cornernote\behaviors\SoftDeleteBehavior::className(),
+            'class' => \cornernote\softdelete\SoftDeleteBehavior::className(),
             'attribute' => 'deleted_time',
             'value' => new \yii\db\Expression('NOW()'), // for sqlite use - new \yii\db\Expression("date('now')")
         ],
@@ -52,10 +52,10 @@ In your ActiveQuery class:
 ```php
 public function behaviors() {
     return [
-        \cornernote\behaviors\SoftDeleteQueryBehavior::className(),
+        \cornernote\softdelete\SoftDeleteQueryBehavior::className(),
         // or
         [
-            'class' => \cornernote\behaviors\SoftDeleteQueryBehavior::className(),
+            'class' => \cornernote\softdelete\SoftDeleteQueryBehavior::className(),
             'attribute' => 'deleted_time',
         ],
     ];
