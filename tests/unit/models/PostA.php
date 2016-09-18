@@ -7,6 +7,7 @@
 
 namespace tests\models;
 
+use common\models\ProductQuery;
 use cornernote\softdelete\SoftDeleteBehavior;
 use yii\db\ActiveRecord;
 
@@ -46,5 +47,13 @@ class PostA extends ActiveRecord
     public static function find()
     {
         return new PostQuery(get_called_class());
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery|ProductQuery
+     */
+    public function getPostB()
+    {
+        return $this->hasOne(PostB::className(), ['id' => 'id']);
     }
 }

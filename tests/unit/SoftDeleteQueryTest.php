@@ -43,4 +43,17 @@ class SoftDeleteQueryTest extends DatabaseTestCase
         $this->assertEquals(require(__DIR__ . '/data/test-find-not-deleted-posts.php'), $data);
     }
 
+    /**
+     * Find Not Deleted Posts
+     */
+    public function testFindNotDeletedPostsWithJoin()
+    {
+        $data = [];
+        $posts = PostA::find()->notDeleted()->joinWith('postB')->all();
+        foreach ($posts as $post) {
+            $data[] = $post->toArray();
+        }
+        $this->assertEquals(require(__DIR__ . '/data/test-find-not-deleted-posts.php'), $data);
+    }
+
 }

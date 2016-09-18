@@ -45,4 +45,11 @@ class PostB extends ActiveRecord
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery|ProductQuery
+     */
+    public function getPostA()
+    {
+        return $this->hasOne(PostA::className(), ['id' => 'id']);
+    }
 }
