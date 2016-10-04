@@ -10,6 +10,7 @@ namespace cornernote\softdelete;
 
 use yii\base\Behavior;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * SoftDeleteQueryBehavior
@@ -36,19 +37,26 @@ class SoftDeleteQueryBehavior extends Behavior
     public $attribute = 'deleted_at';
 
     /**
-     * @return static
+     * @return ActiveQuery
      */
     public function deleted()
     {
-        return $this->owner->andWhere($this->attribute . ' IS NOT NULL');
+        /** @var ActiveRecord $modelClass */
+        $modelClass = $this->owner->modelClass;
+        $tableName = $modelClass::tableName();
+
+        return $this->owner->andWhere($tableName.'.'.$this->attribute.' IS NOT NULL');
     }
 
     /**
-     * @return static
+     * @return ActiveQuery
      */
     public function notDeleted()
     {
-        return $this->owner->andWhere($this->attribute . ' IS NULL');
-    }
+        /** @var ActiveRecord $modelClass */
+        $modelClass = $this->owner->modelClass;
+        $tableName = $modelClass::tableName();
 
+        return $this->owner->andWhere($tableName.'.'.$this->attribute.' IS NULL');
+    }
 }
