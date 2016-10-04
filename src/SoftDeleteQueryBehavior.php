@@ -44,8 +44,7 @@ class SoftDeleteQueryBehavior extends Behavior
         /** @var ActiveRecord $modelClass */
         $modelClass = $this->owner->modelClass;
         $tableName = $modelClass::tableName();
-
-        return $this->owner->andWhere($tableName.'.'.$this->attribute.' IS NOT NULL');
+        return $this->owner->andWhere($tableName . '.' . $this->attribute . ' IS NOT NULL');
     }
 
     /**
@@ -56,7 +55,6 @@ class SoftDeleteQueryBehavior extends Behavior
         /** @var ActiveRecord $modelClass */
         $modelClass = $this->owner->modelClass;
         $tableName = $modelClass::tableName();
-
-        return $this->owner->andWhere($tableName.'.'.$this->attribute.' IS NULL');
+        return $this->owner->andWhere($tableName . '.' . $this->attribute . ' IS NULL');
     }
 }
