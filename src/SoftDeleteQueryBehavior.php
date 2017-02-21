@@ -1,10 +1,4 @@
 <?php
-/**
- * @author Brett O'Donnell <cornernote@gmail.com>
- * @copyright 2015 Mr PHP
- * @link https://github.com/cornernote/yii2-softdelete
- * @license BSD-3-Clause https://raw.github.com/cornernote/yii2-softdelete/master/LICENSE.md
- */
 
 namespace cornernote\softdelete;
 
@@ -28,6 +22,8 @@ use yii\db\ActiveRecord;
  * ```
  *
  * @property ActiveQuery $owner
+ *
+ * @author cornernote <cornernote@gmail.com>
  */
 class SoftDeleteQueryBehavior extends Behavior
 {
@@ -37,24 +33,29 @@ class SoftDeleteQueryBehavior extends Behavior
     public $attribute = 'deleted_at';
 
     /**
-     * @return ActiveQuery
+     * @return static
      */
     public function deleted()
     {
-        /** @var ActiveRecord $modelClass */
-        $modelClass = $this->owner->modelClass;
-        $tableName = $modelClass::tableName();
-        return $this->owner->andWhere($tableName . '.' . $this->attribute . ' IS NOT NULL');
+        return $this->owner->andWhere($this->tableName() . '.' . $this->attribute . ' IS NOT NULL');
     }
 
     /**
-     * @return ActiveQuery
+     * @return static
      */
     public function notDeleted()
     {
+        return $this->owner->andWhere($this->tableName() . '.' . $this->attribute . ' IS NULL');
+    }
+
+    /**
+     * @return string
+     */
+    protected function tableName()
+    {
         /** @var ActiveRecord $modelClass */
         $modelClass = $this->owner->modelClass;
-        $tableName = $modelClass::tableName();
-        return $this->owner->andWhere($tableName . '.' . $this->attribute . ' IS NULL');
+        return $modelClass::tableName();
     }
+
 }
