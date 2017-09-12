@@ -75,7 +75,7 @@ class SoftDeleteBehavior extends Behavior
         $attribute = $this->attribute;
         $this->owner->$attribute = $this->getValue(null);
         // save record
-        $this->owner->save(false, [$attribute]);
+        return $this->owner->save(false, [$attribute]);
     }
 
     /**
@@ -87,7 +87,7 @@ class SoftDeleteBehavior extends Behavior
         $attribute = $this->attribute;
         $this->owner->$attribute = null;
         // save record
-        $this->owner->save(false, [$attribute]);
+        return $this->owner->save(false, [$attribute]);
     }
 
     /**
@@ -99,7 +99,7 @@ class SoftDeleteBehavior extends Behavior
         $model = $this->owner;
         $this->detach();
         // delete as normal
-        $model->delete();
+        return 0 !== $model->delete();
     }
 
     /**

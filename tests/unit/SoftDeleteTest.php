@@ -10,7 +10,6 @@ namespace tests;
 
 use tests\models\PostA;
 use tests\models\PostB;
-use Yii;
 
 /**
  * SoftDeleteTest
@@ -25,7 +24,21 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostA $post */
         $post = PostA::findOne(2);
-        $post->delete();
+        // delete() must return `false`, because we can't prevent real deletion and return `true` at the same time
+        $this->assertFalse($post->delete(), 'Result of `delete()` expected to be `false`');
+        $this->assertNotNull($post->deleted_at);
+        $post = PostA::findOne(2);
+        $this->assertNotNull($post->deleted_at);
+    }
+
+    /**
+     * Explicit Soft Delete PostA
+     */
+    public function testExplicitSoftDeletePostA()
+    {
+        /** @var PostA $post */
+        $post = PostA::findOne(2);
+        $this->assertTrue($post->softDelete(), 'Result of `softDelete()` expected to be `true`');
         $this->assertNotNull($post->deleted_at);
         $post = PostA::findOne(2);
         $this->assertNotNull($post->deleted_at);
@@ -38,11 +51,12 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostA $post */
         $post = PostA::findOne(2);
-        $post->delete();
+        // delete() must return `false`, because we can't prevent real deletion and return `true` at the same time
+        $this->assertFalse($post->delete(), 'Result of `delete()` expected to be `false`');
         $this->assertNotNull($post->deleted_at);
         $post = PostA::findOne(2);
         $this->assertNotNull($post->deleted_at);
-        $post->unDelete();
+        $this->assertTrue($post->unDelete(), 'Result of `unDelete()` expected to be `true`');
         $this->assertNull($post->deleted_at);
         $post = PostA::findOne(2);
         $this->assertNull($post->deleted_at);
@@ -55,7 +69,7 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostA $post */
         $post = PostA::findOne(2);
-        $post->hardDelete();
+        $this->assertTrue($post->hardDelete(), 'Result of `hardDelete()` expected to be `true`');
         $post = PostA::findOne(2);
         $this->assertNull($post);
     }
@@ -67,7 +81,8 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostB $post */
         $post = PostB::findOne(2);
-        $post->delete();
+        // delete() must return `false`, because we can't prevent real deletion and return `true` at the same time
+        $this->assertFalse($post->delete(), 'Result of `delete()` expected to be `false`');
         $this->assertNotNull($post->deleted_at);
         $post = PostB::findOne(2);
         $this->assertNotNull($post->deleted_at);
@@ -80,11 +95,12 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostB $post */
         $post = PostB::findOne(2);
-        $post->delete();
+        // delete() must return `false`, because we can't prevent real deletion and return `true` at the same time
+        $this->assertFalse($post->delete(), 'Result of `delete()` expected to be `false`');
         $this->assertNotNull($post->deleted_at);
         $post = PostB::findOne(2);
         $this->assertNotNull($post->deleted_at);
-        $post->unDelete();
+        $this->assertTrue($post->unDelete(), 'Result of `unDelete()` expected to be `true`');
         $this->assertNull($post->deleted_at);
         $post = PostB::findOne(2);
         $this->assertNull($post->deleted_at);
@@ -97,9 +113,8 @@ class SoftDeleteTest extends DatabaseTestCase
     {
         /** @var PostB $post */
         $post = PostB::findOne(2);
-        $post->hardDelete();
+        $this->assertTrue($post->hardDelete(), 'Result of `hardDelete()` expected to be `true`');
         $post = PostB::findOne(2);
         $this->assertNull($post);
     }
-
 }
