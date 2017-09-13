@@ -47,6 +47,11 @@ public function behaviors() {
 }
 ```
 
+then you can use explicitly `$model->softDelete()`, `$model->hardDelete()`
+and `$model->unDelete()` (for softly deleted models). Each of these methods return
+boolean result. Also `$model->softDelete()` calls indirectly from `$model->delete()`,
+which always returns `false`.
+
 In your ActiveQuery class:
 
 ```php
